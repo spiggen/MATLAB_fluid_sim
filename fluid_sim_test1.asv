@@ -1,0 +1,32 @@
+mypath = erase(mfilename("fullpath"), "\fluid sim 3\fluid_sim_test1")+"\";
+addpath(mypath+"colorthemes")
+addpath(mypath+"spiggens toolbox")
+warning("off")
+
+
+myax = axes();
+%fireflies();
+
+dt = 0.0001;
+
+x_vec = linspace(0,10,100);
+y_vec = linspace(0,10,100);
+
+initiate_fluid_field
+%v_x = sin(x_mesh).*cos(y_mesh)*10;
+%v_y = sin(y_mesh).*cos(y_mesh)*10;
+mass = sin(x_mesh).*cos(y_mesh)+pi;
+
+
+while true
+v_x(20:80,45:50) = -100;
+step_velocity
+
+imagesc(myax, mass);
+myax.NextPlot = "add";
+quiver(myax,v_x,v_y)
+myax.NextPlot = "replacechildren";
+xlim(myax, [0,100]);
+ylim(myax, [0,100]);
+drawnow
+end
